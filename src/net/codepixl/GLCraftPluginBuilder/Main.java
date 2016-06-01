@@ -30,24 +30,16 @@ public class Main {
 	
 	public static void build(BuildOptions o){
 		try {
-			File outFolder = new File(o.outLoc+"/"+o.name);
+			File outFolder = new File(o.outLoc+"/plugin");
 			outFolder.mkdirs();
-			JSONObject j = new JSONObject();
-			j.put("pluginName", o.name);
-			j.put("pluginVersion", o.ver);
-			j.put("pluginDescription", o.desc);
-			j.put("mainClass", o.main);
-			FileWriter out = new FileWriter(new File(outFolder.getAbsolutePath()+"/plugin.json"));
-			j.write(out);
-			out.flush();
-			out.close();
 			FileUtils.copyDirectory(new File(o.binLoc), outFolder);
+			FileUtils.copyFile(new File(new File(o.binLoc).getParentFile(),"plugin.json"),new File(outFolder,"plugin.json"));
 			ZipFile zip = new ZipFile(new File(outFolder.getParent(),outFolder.getName()+".glcp"));
 			ZipParameters params = new ZipParameters();
 			params.setIncludeRootFolder(false);
 			zip.addFolder(outFolder, params);
 			deleteDirectory(outFolder);
-			JOptionPane.showMessageDialog(null, "Successfully saved as "+o.name+".glcp","GLCraft Plugin Builder", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Successfully saved as plugin.glcp","GLCraft Plugin Builder", JOptionPane.INFORMATION_MESSAGE);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, "An IOException occurred.","GLCraft Plugin Builder", JOptionPane.ERROR_MESSAGE);

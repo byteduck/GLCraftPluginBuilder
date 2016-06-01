@@ -29,51 +29,6 @@ public class MainWindow extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("GLCraft Plugin Builder");
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-		JPanel panel = new JPanel();
-		getContentPane().add(panel);
-		panel.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
-		
-		JLabel lblPluginName = new JLabel("Plugin Name");
-		panel.add(lblPluginName, "2, 2, right, default");
-		
-		nameField = new JTextField();
-		panel.add(nameField, "4, 2, fill, default");
-		nameField.setColumns(10);
-		
-		JLabel lblPluginVersion = new JLabel("Plugin Version");
-		panel.add(lblPluginVersion, "2, 4, right, default");
-		
-		verField = new JTextField();
-		panel.add(verField, "4, 4, fill, default");
-		verField.setColumns(10);
-		
-		JLabel lblPluginDescription = new JLabel("Plugin Description");
-		panel.add(lblPluginDescription, "2, 6, right, default");
-		
-		descField = new JTextField();
-		panel.add(descField, "4, 6, fill, default");
-		descField.setColumns(10);
-		
-		JLabel lblMainClass = new JLabel("Main Class");
-		panel.add(lblMainClass, "2, 8, right, default");
-		
-		mainField = new JTextField();
-		mainField.setToolTipText("");
-		panel.add(mainField, "4, 8, fill, default");
-		mainField.setColumns(10);
 		
 		JPanel panel_2 = new JPanel();
 		getContentPane().add(panel_2);
@@ -142,7 +97,7 @@ public class MainWindow extends JFrame {
 		JButton buildButton = new JButton("Build");
 		buildButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Main.build(new BuildOptions(outField.getText(),locField.getText(),nameField.getText(),verField.getText(),descField.getText(), mainField.getText()));
+				Main.build(new BuildOptions(outField.getText(),locField.getText()));
 			}
 		});
 		panel_1.add(buildButton);
